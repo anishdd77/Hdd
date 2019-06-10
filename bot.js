@@ -1,6 +1,6 @@
 var Discord = require('discord.js');
 var fs = require('fs');
-var client = new Discord.Client(E2wqz8q1c0s8_qATd8y7xdZ_ZXEU-1nK);
+var client = new Discord.Client();
 
 client.on('ready', () => {
   console.log(`Welcome in servr Anis ${client.user.tag}!`);
