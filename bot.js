@@ -2101,7 +2101,7 @@ __
 
 client.on('message', message => {//new msg event
                 if(!message.channel.guild) return;
-                  if(message.content.startsWith(prefix + 'set Rainbow')) {//to create the rainbow role
+                  if(message.content.startsWith(prefix + 'setrainbow')) {//to create the rainbow role
                       let role = message.guild.roles.find('name', 'Rainbow bot.')
                     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
                   //start of create role 
@@ -2127,5 +2127,7 @@ client.on('message', message => {//new msg event
                       });
                   }, 3000);//the rainbow time
                 })
+				
+				
 
 client.login(process.env.BOT_TOKEN)
