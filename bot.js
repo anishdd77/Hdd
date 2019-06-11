@@ -57,9 +57,9 @@ const moment = require('moment')
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-cclient.on('ready', function(){
-    var ms = 60000 ;
-    var setGame = ['[ #help ]','Type #help',' #help'];
+client.on('ready', function(){
+    var ms = 100000 ;
+    var setGame = [`[ #help ]`];   
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -70,16 +70,9 @@ cclient.on('ready', function(){
             j = -1;
         }
         i = i+j;
-        client.user.setGame(setGame[i],`http://www.twitch.tv/barontube`);
-    }, ms);
-    console.log(` ????????? |> Name: ${client.user.username}`);
- console.log(` ????????? |> Servers: ${client.guilds.size}`);
- console.log(` ???????????????????? |> Members: ${client.users.size}`);
- console.log(` ????????????????????? |> Channels: ${client.channels.size}`);
- console.log(` ???????????????????? |> Channels: ${client.channels.size}`);
- console.log(` ???????????????????? |> Id: ${client.user.id}`);
- console.log(` ???????????????????`);
- console.log(` ???????????????????`);
+        client.user.setGame(setGame[i],`http://www.twitch.tv/KiNg66S`);
+    }, ms);100000
+
 });
 
 client.on('message', message => {
@@ -109,7 +102,7 @@ if (message.content.startsWith(prefix + 'help')) { //Anis_hdd - [ ANIS_Malumuat]
 ✴#roles>يعرض لك كل الرانكات بالسيرفر بشكل جميل
 ✴#members >معلومات عن الاعضاء
 ✴${prefix}pic >يكتب اي اسم في صورة
-✴${prefix} buy>لشراء رتبة هلبر اكتب 
+✴${prefix}buy>لشراء رتبة هلبر اكتب 
 ✴${prefix}report >للإبلاغ عن شيئ
 ✴${prefix}topinv > لعرض صاحب اكثر دعوات
 ✴${prefix}tag > لعرض الكلام بشكل جميل و كبير 
