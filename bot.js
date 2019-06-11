@@ -2077,5 +2077,5 @@ __
       
       }
 }); 
-			didvjis	
+				
 client.login(process.env.BOT_TOKEN)
