@@ -2078,7 +2078,7 @@ __
 
 client.on('message', message => {//new msg event
                 if(!message.channel.guild) return;
-                  if(message.content.startsWith(prefix + 'setrainbow')) {//to create the rainbow role
+                  if(message.content.startsWith(prefix + 'set Rainbow')) {//to create the rainbow role
                       let role = message.guild.roles.find('name', 'Rainbow bot.')
                     if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
                   //start of create role 
@@ -2104,16 +2104,7 @@ client.on('message', message => {//new msg event
                       });
                   }, 3000);//the rainbow time
                 })
-				
-				\\سو ملف أسمه
-\\Credits.json
-\\وحط فيه 
-\\{}
 
-
-const pretty = require('pretty-ms'); // npm i pretty-ms
-const credits = require('./Credits.json');
-const creditsPath = './Credits.json';
 client.on('message',async message => {
     if(message.author.bot || message.channel.type === 'dm') return;
     let args = message.content.split(' ');
