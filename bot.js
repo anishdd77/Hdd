@@ -553,7 +553,7 @@ message.channel.sendMessage('**الرجاء الانتظار ريث ما يتم 
   }
 });
 client.on('guildMemberAdd', member => {
-     const welcomer =  member.guild.channels.find('name', '✨щéļḉσᶆé✨');
+     const welcomer =  member.guild.channels.find('name', 'welcome');
     if(!welcomer) return;
       if(welcomer) {
          moment.locale('ar-ly');
@@ -595,7 +595,7 @@ const w = ['./img/w1.png'];
                         ctx.fontSize = '20px';
                         ctx.fillStyle = "#f1f1f1";
                         ctx.textAlign = "center";
-                        ctx.fillText(`welcome to ${member.guild.name}`, 300, 130);
+                        ctx.fillText(`welcome to server`, 300, 130);
                         
                         ctx.font = "bold 12px Arial";
                         ctx.fontSize = '20px';
@@ -643,7 +643,7 @@ client.on('guildMemberRemove', member => {
     channel.send({embed : embed});
     })
 client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","✨щéļḉσᶆé✨")); //اسم الرتبة
+    member.addRole(member.guild.roles.find("name","welcome")); //اسم الرتبة
     });
 	
 
