@@ -2196,10 +2196,10 @@ client.on('message', rw => {
 if (!rw.member.hasPermission("MOVE_MEMBERS")) return rw.channel.send("**YOU DONT HAVE PERMISSION** | ❎ ");
 let men = rw.mentions.users.first()
 let mas = rw.author//Toixc Codes 
-if(!men) return rw.channel.send('``');
+if(!men) return rw.channel.send('`.`');
 rw.guild.channels.forEach(c => {
 c.overwritePermissions(men.id, {
-          CONNECT: false
+          CONNECT: true
 })
     })
 const embed = new Discord.RichEmbed()
@@ -2227,7 +2227,7 @@ client.on('message', rw => {
   if (rw.content.startsWith('uvb')) {
 if (!rw.member.hasPermission("MOVE_MEMBERS")) return rw.channel.send("**YOU DONT HAVE PERMISSION** | ❎ ");
  let men = rw.mentions.users.first()
- let mas = rw.author//Toixc Codes 
+ let mas = rw.author
  if(!men) return rw.channel.send('`MANTION THE MEMBER `');
  rw.guild.channels.forEach(c => { 
  c.overwritePermissions(men.id, { 
