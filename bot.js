@@ -2191,5 +2191,68 @@ client.on("guildMemberAdd", member => {
 }).catch(console.error)
 })
 
+client.on('message', rw => {
+  if (rw.content.startsWith('vb')) {
+if (!rw.member.hasPermission("MOVE_MEMBERS")) return rw.channel.send("**YOU DONT HAVE PERMISSION** | ❎ ");
+let men = rw.mentions.users.first()
+let mas = rw.author//Toixc Codes 
+if(!men) return rw.channel.send('``');
+rw.guild.channels.forEach(c => {
+c.overwritePermissions(men.id, {
+          CONNECT: false
+})
+    })
+const embed = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setDescription(`**
+ <@${men.id}>
+YOU CANT JOIN THE VOICE ROOM
+BANNER : <@${rw.author.id}> **`)
+.setThumbnail("https://cdn.discordapp.com/attachments/408952032112803850/452090205793681419/fd684707fc14f41663f15ecebf089f06.png")
+          
+client.users.get(men.id).sendEmbed(embed)
+const Embed11 = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setAuthor(rw.guild.name, rw.guild.iconURL)
+.setDescription(`          <@${men.id}>
+BANNED//Toixc Codes 
+BANNER : <@${rw.author.id}> `)
+.setThumbnail("https://cdn.discordapp.com/attachments/408952032112803850/452090205793681419/fd684707fc14f41663f15ecebf089f06.png")
+rw.channel.sendEmbed(Embed11).then(rw => {rw.delete(10000)})
+    }
+})
+ 
+ //فكه//Toixc Codes 
+client.on('message', rw => {
+  if (rw.content.startsWith('uvb')) {
+if (!rw.member.hasPermission("MOVE_MEMBERS")) return rw.channel.send("**YOU DONT HAVE PERMISSION** | ❎ ");
+ let men = rw.mentions.users.first()
+ let mas = rw.author//Toixc Codes 
+ if(!men) return rw.channel.send('`MANTION THE MEMBER `');
+ rw.guild.channels.forEach(c => { 
+ c.overwritePermissions(men.id, { 
+         CONNECT: true//Toixc Codes 
+ })
+    })//Toixc Codes 
+const embed = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setDescription(`**
+ <@${men.id}>
+ Welcome Back
+Back With : <@${rw.author.id}> **`)
+.setThumbnail("https://cdn.discordapp.com/attachments/408952032112803850/452093541003296788/start-button-hi.png")
+          
+client.users.get(men.id).sendEmbed(embed)
+const Embed11 = new Discord.RichEmbed()
+.setColor("RANDOM")
+.setAuthor(rw.guild.name, rw.guild.iconURL)
+.setDescription(`          <@${men.id}>
+GO FOR VOICE NOW
+With : <@${rw.author.id}>
+`)
+.setThumbnail("https://cdn.discordapp.com/attachments/408952032112803850/452093541003296788/start-button-hi.png")
+rw.channel.sendEmbed(Embed11).then(rw => {rw.delete(15000)})//Toixc Codes 
+    }
+}) 
 				
 client.login(process.env.BOT_TOKEN)
