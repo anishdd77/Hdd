@@ -764,25 +764,6 @@ message.channel.sendEmbed(cat);
     }
 });
 
-/*افتار*/
-
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "avatar")) {
-        var mentionned = message.mentions.users.first();
-    var x5bzm;
-      if(mentionned){
-          var x5bzm = mentionned;
-      } else {
-          var x5bzm = message.author;
-          
-      }
-        const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setImage(`${x5bzm.avatarURL}`)
-      message.channel.sendEmbed(embed);
-    }
-});
-
 /*سورت*/
 
 client.on('message', message => {
@@ -2202,26 +2183,5 @@ return channel.send("** نورت سيرفرنا حبيبي اتمنى تستمت
  
 });
 
-client.on('message', message => {
-    if (message.content.startsWith("#avatar")) {
-        if (message.author.bot) return
-        var mentionned = message.mentions.users.first();
-    var omar;
-      if(mentionned){
-          var omar = mentionned;
-      } else {
-          var omar = message.author;
-          
-      }
-        const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setAuthor('Avatar Link :')
-        .setTitle('Click Here')
-        .setURL(`${omar.avatarURL}`)
-        .setImage(`${omar.avatarURL}`)
-        .setFooter('BayBot',client.user.avatarURL) 
-      message.channel.sendEmbed(embed);
-    }
-});
 				
 client.login(process.env.BOT_TOKEN)
