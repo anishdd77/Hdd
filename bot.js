@@ -2078,5 +2078,56 @@ __
       
       }
 }); 
+
+client.on('message', message => {//new msg event
+                if(!message.channel.guild) return;
+                  if(message.content.startsWith(prefix + 'setR')) {//to create the rainbow role
+                      let role = message.guild.roles.find('name', 'rainbow.')
+                    if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
+                  //start of create role 
+                  if(!role){
+                    rainbow =  message.guild.createRole({
+                   name: "rainbow.",//the role will create name
+                   color: "#000000",//the default color
+                   permissions:[]//the permissions
+                 //end of create role
+                })
+
+                }
+                message.channel.send('Done The Rainbow Role Setup Has Been Completed')//if the step completed
+                }})
+
+                client.on('ready', () => {//new ready event
+                  setInterval(function(){
+                      client.guilds.forEach(g => {
+                                  var role = g.roles.find('name', 'rainbow.');//rainbow role name
+                                  if (role) {
+                                      role.edit({color : "RANDOM"});
+                                  };
+                      });
+                  }, 3000);//the rainbow time
+                })
+				
+				client.on('message', msg => {
+ if (msg.content.startsWith(prefix + 'cal')) {
+    let args = msg.content.split(" ").slice(1);
+        const question = args.join(' ');
+    if (args.length < 1) {
+        msg.reply('** حــدأد عــداد رجــاء مــنــك **');
+} else {    let answer;
+    try {
+        answer = math.eval(question);
+    } catch (err) {
+        msg.reply(`** دخـل رقـم فـقـط **: ${err} :x:`);
+    }
+    
+    const embed = new Discord.RichEmbed()
+    .addField("**إدخال**:",`**${question}**`, true)
+    .addField("**انتاج**:",`**${answer}**`, true)
+    msg.channel.send(embed)  .catch(console.error);
+
+    }
+};
+});
 				
 client.login(process.env.BOT_TOKEN)
