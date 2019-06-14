@@ -1990,17 +1990,17 @@ client.on('message',async message => {
   if(message.content.startsWith(prefix + "giveaway")) {
      //return message.channel.send(':heavy_multiplication_x:| **هذا الامر معطل حاليا.. ``حاول في وقت لاحق``**');
     if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
-    message.channel.send(`:eight_pointed_black_star:| **منشن الروم الذي تريد به القيف اواي**`).then(msgg => {
+    message.channel.send(`:eight_pointed_black_star:| **من فضلك اكتب اسم الروم**`).then(msgg => {
       message.channel.awaitMessages(filter, {
         max: 1,
         time: 20000,
         errors: ['time']
       }).then(collected => {
-        let room = message.guild.channels.find('giveaway', collected.first().content);
+        let room = message.guild.channels.find('name', collected.first().content);
         if(!room) return message.channel.send(':heavy_multiplication_x:| **لم اقدر على ايجاد الروم المطلوب**');
         room = collected.first().content;
         collected.first().delete();
-        msgg.edit(':eight_pointed_black_star:| **اكتب مدة القيف اواي**').then(msg => {
+        msgg.edit(':eight_pointed_black_star:| **اكتب مدة القيف اواي بالدقائق , مثال : 60**').then(msg => {
           message.channel.awaitMessages(filter, {
             max: 1,
             time: 20000,
