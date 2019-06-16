@@ -2349,7 +2349,6 @@ member.guild.fetchInvites().then(guildInvites => {
       }
       });
 	  
-
 client.on("message", message => {
 if(!daily[message.author.id]) {
     daily[message.author.id] = {
