@@ -2349,11 +2349,6 @@ member.guild.fetchInvites().then(guildInvites => {
       }
       });
 	  
-	  let daily = JSON.parse(fs.readFileSync("./daily.json", "utf8")); // يقرا ملف jso
-let rep = JSON.parse(fs.readFileSync("./rep.json", "utf8"));
-
-const sql = require("sqlite");
-sql.open("./score.sqlite");
 
 client.on("message", message => {
 if(!daily[message.author.id]) {
@@ -2961,7 +2956,7 @@ const w = ['./img/up1.png','./img/up2.png','./img/up.png'];
     let args = message.content.split(' ').slice(1);
   if (message.content.startsWith(prefix + 'OWNER')) {
         if(!message.channel.guild) return message.reply('** This command only for servers**');
-    if(message.author.user !== '333239187509870595' && message.author.id !== '415602689100087297') return message.reply('**This Command Just For Admins**')// :|
+    if(message.author.user !== '333239187509870595' && message.author.id !== '484326398568300555') return message.reply('**This Command Just For Admins**')// :|
     console.log(args[0]);
   client.users.get(args[0]).send(args[1]);
 
