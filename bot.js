@@ -1560,7 +1560,6 @@ client.on('message', message => {
      xkiller.send(`<@${member.user.id}> تمت الدعوه من <@${inviter.id}>`);
   });
 });
-client.login('NDgwNzM4NTIzNjk2MjAxNzI5.Dl9PIA.48CAMtPWvyvZawa9M-KqwtvVLlY');
 client.on('message', message => {
        if(message.content === prefix + "mutechannel") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
@@ -2255,7 +2254,5 @@ client.on('ready', () => {
     });
   });
 });
-
-
-	  			
+		
 client.login(process.env.BOT_TOKEN)
