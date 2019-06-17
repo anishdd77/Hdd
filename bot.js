@@ -2239,7 +2239,7 @@ GO FOR VOICE NOW
 With : <@${rw.author.id}>
 `)
 .setThumbnail("https://cdn.discordapp.com/attachments/408952032112803850/452093541003296788/start-button-hi.png")
-rw.channel.sendEmbed(Embed11).then(rw => {rw.delete(15000)})//Toixc Codes 
+rw.channel.sendEmbed(Embed11).then(rw => {rw.delete(15000)}) 
     }
 }) 
 
