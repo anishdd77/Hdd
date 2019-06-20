@@ -1,7 +1,7 @@
 var Discord = require('discord.js');
 var fs = require('fs');
 var client = new Discord.Client();
-const devs = ['530403193130057740'];
+var client = new Discord.Client();
 
 client.on('ready', () => {
   console.log(`Welcome in servr Anis ${client.user.tag}!`);
@@ -2115,6 +2115,9 @@ client.on('guildMemberAdd', member => {
 return channel.send("** نورت سيرفرنا حبيبي اتمنى تستمتع **")
     }
     )});
+
+
+
 
 
 client.on('ready',async () => console.log(`   - " ${client.user.username} " , Tickety is ready to work.`));
