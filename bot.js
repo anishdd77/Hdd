@@ -2117,7 +2117,6 @@ return channel.send("** نورت سيرفرنا حبيبي اتمنى تستمت
     )});
 
 
-client.on('ready',async () => console.log(`   - " ${client.user.username} " , Tickety is ready to work.`));
 client.on("message", async message => {
     if(message.content.startsWith(prefix + "help")) {
         let help = new Discord.RichEmbed()
@@ -2131,6 +2130,9 @@ client.on("message", async message => {
             .addField(``)
             await message.channel.send(`:white_check_mark: , **هذه قائمة بجميع اوامر البووت.**`);
             await message.channel.send(embed);
+			 message.channel.sendEmbed(help);
+    }
+});
     } else if(args[0].toLowerCase() === `${prefix}new`) {
         if(mtickets === false) return message.channel.send(`:tools: , **تم ايقاف هذه الخاصية من قبل احد ادارة السيرفر**`);
         if(!message.guild.me.hasPermission("MANAGE_CHANNELS")) return message.channel.send(`:tools: , **البوت لا يملك صلاحيات لصنع الروم**`);
