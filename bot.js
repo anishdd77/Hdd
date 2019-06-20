@@ -2121,14 +2121,14 @@ client.on('message',async message => {
     if(message.author.bot || message.channel.type === 'dm') return;
     let args = message.content.split(" ");
     let author = message.author.id;
-    if(args[0].toLowerCase() === `${prefix}help`) {
+    if(args[0].toLowerCase() === `#help`) {
             let embed = new Discord.RichEmbed()
             .setAuthor(message.author.username, message.author.avatarURL)
             .setThumbnail(message.author.avatarURL)
             .setColor("#36393e")
-			.addField(`⇏ -new                     → لفتح تكت`)
-            .addField(`⇏ -close                   → لغلق تكت`)
-            .addField(`⇏ -mtickets enable/disable → لتعطيل وتفعيل تكت `)
+			.addField(`⇏ #new                     → لفتح تكت`)
+            .addField(`⇏ #close                   → لغلق تكت`)
+            .addField(`⇏ #mtickets enable/disable → لتعطيل وتفعيل تكت `)
 			.addField(`⇏ cleartickets             →  لمسح جميع تكتات`)
             .addField(``)
             await message.channel.send(`:white_check_mark: , **هذه قائمة بجميع اوامر البووت.**`);
@@ -2188,7 +2188,7 @@ client.on('message',async message => {
 		if(!devs.includes(message.author.id)) return message.channel.send(`:tools:, **أنت لست من ادارة السيرفر لأستخدام هذا الأمر.**`);
 		message.channel.send(`:white_check_mark:, **جارى اعادة تشغيل البوت.**`);
 		client.destroy();
-	} else if(args[0].toLowerCase() === `${prefix}deletetickets`) {
+	} else if(args[0].toLowerCase() === `#deletetickets`) {
 		let iq = 0;
 		for(let q = 0; q < tchannels.length; q++) {
 			let c = message.guild.channels.get(tchannels[q]);
