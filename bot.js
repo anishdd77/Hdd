@@ -1,6 +1,7 @@
 var Discord = require('discord.js');
 var fs = require('fs');
 var client = new Discord.Client();
+const devs = ['530403193130057740'];
 
 client.on('ready', () => {
   console.log(`Welcome in servr Anis ${client.user.tag}!`);
@@ -2114,13 +2115,6 @@ client.on('guildMemberAdd', member => {
 return channel.send("** نورت سيرفرنا حبيبي اتمنى تستمتع **")
     }
     )});
-
-const category = "category-id";
-const devs     = ["484326398568300555", "test"];
-let mtickets   = true;
-let tchannels  = [];
-let current    = 0;
-
 
 client.on('ready',async () => console.log(`   - " ${client.user.username} " , Tickety is ready to work.`));
 client.on('message',async message => {
