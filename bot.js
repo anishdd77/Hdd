@@ -2115,7 +2115,6 @@ return channel.send("** نورت سيرفرنا حبيبي اتمنى تستمت
     }
     )});
 
-const prefix   = "-";
 const category = "category-id";
 const devs     = ["484326398568300555", "test"];
 let mtickets   = true;

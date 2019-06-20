@@ -9,6 +9,7 @@
     "child_process": "^1.0.2",
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
+    "devs": "^0.2.2",
     "discord-anti-spam": "^1.1.2",
     "discord.js": "^11.5.1",
     "ffmpeg-binaries": "^4.0.0",
