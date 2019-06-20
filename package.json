@@ -10,7 +10,7 @@
     "common-tags": "^1.8.0",
     "dateformat": "^3.0.3",
     "discord-anti-spam": "^1.1.2",
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.5.1",
     "ffmpeg-binaries": "^4.0.0",
     "figlet": "^1.2.0",
     "file-system": "^2.2.2",
