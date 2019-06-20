@@ -2133,15 +2133,6 @@ message.channel.send(`**${t} | warn was successfully created**`)
     }
     } 
      }) 
-	 
-	 const Discord  = require('discord.js');
-const client     = new Discord.Client();
-const prefix   = "-";
-const category = "category-id";
-const devs     = ["your-id", "test"];
-let mtickets   = true;
-let tchannels  = [];
-let current    = 0;
 
 
 client.on('ready',async () => console.log(`   - " ${client.user.username} " , Tickety is ready to work.`));
