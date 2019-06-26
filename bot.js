@@ -1,6 +1,12 @@
 var Discord = require('discord.js');
 var fs = require('fs');
 var client = new Discord.Client();
+const Canvas = require('canvas-prebuilt'); // Canvas Package for photo stuffs
+const Jimp = require('jimp'); // Jimp Package to get User's Avatar
+const SQLite = require('sqlite'); // SQLite Package to read & write to sql files and databases
+const path = require('path'); // Path Package to get paths easily
+const ms = require('parse-ms'); // parse-ms Package to format ms to somethings
+const { User, MessageMentions } = require('discord.js') // Disocrd Package Classes
 
 client.on('ready', () => {
   console.log(`Welcome in servr Anis ${client.user.tag}!`);
@@ -11,7 +17,7 @@ client.on('message', message => {
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
-  if (message.author.id !== "580829741498630192") return;
+  if (message.author.id !== "484326398568300555") return;
 
   
   if (message.content.startsWith(prefix + 'setwatch')) {
@@ -57,23 +63,6 @@ const moment = require('moment')
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-client.on('ready', function(){
-    var ms = 100000 ;
-    var setGame = [`[ #help ]`];   
-    var i = -1;
-    var j = 0;
-    setInterval(function (){
-        if( i == -1 ){
-            j = 1;
-        }
-        if( i == (setGame.length)-1 ){
-            j = -1;
-        }
-        i = i+j;
-        client.user.setGame(setGame[i],`http://www.twitch.tv/KiNg66S`);
-    }, ms);100000
-
-});
 
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) { //Anis_hdd - [ ANIS_Malumuat]
@@ -107,8 +96,7 @@ if (message.content.startsWith(prefix + 'help')) { //Anis_hdd - [ ANIS_Malumuat]
 ✴${prefix}topinv > لعرض صاحب اكثر دعوات
 ✴${prefix}tag > لعرض الكلام بشكل جميل و كبير 
 ✴${prefix}rules > يعرض لك قوانين السيرفر
-#new لإنشاء تذركة
-#close للإقفال تذكرتك
+
 
 **
   `
@@ -555,83 +543,30 @@ message.channel.sendMessage('**الرجاء الانتظار ريث ما يتم 
   });
   }
 });
+
 client.on('guildMemberAdd', member => {
-     const welcomer =  member.guild.channels.find('name', 'welcome');
-    if(!welcomer) return;
-      if(welcomer) {
-         moment.locale('ar-ly');
-         var m = member.user;
-        let yumz = new Discord.RichEmbed()
+    let channel = member.guild.channels.find('name', 'welcome');
+    let memberavatar = member.user.avatarURL
+      if (!channel) return;
+    let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
-        .setThumbnail(m.avatarURL)
-        .setAuthor(m.username,m.avatarURL)
-        .addField(': تاريخ دخولك الدسكورد',`${moment(member.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(member.user.createdAt).fromNow()}\``,true)            
-      
-         .setFooter(`${m.tag}`,"https://images-ext-2.discordapp.net/external/JpyzxW2wMRG2874gSTdNTpC_q9AHl8x8V4SMmtRtlVk/https/orcid.org/sites/default/files/files/ID_symbol_B-W_128x128.gif")
-     welcomer.send({embed:yumz});          
-         
+        .setThumbnail(memberavatar)
+        .addField('🎽 | name :  ',`${member}`)
+        .addField('📢 | نورت السيرفر يا قلبي' , `Welcome to the server, ${member}`)
+        .addField('🆔 | user :', "**[" + `${member.id}` + "]**" )
+                .addField('➡| انت العضو رقم',`${member.guild.memberCount}`)
+               
+                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
+                     
+                                     .addField(' الـسيرفر', `${member.guild.name}`,true)
+                                       
+     .setFooter(`${member.guild.name}`)
+        .setTimestamp()
+   
+      channel.sendEmbed(embed);
+    });
     
-
-
-
-const w = ['./img/w1.png'];
-
-         let Image = Canvas.Image,
-            canvas = new Canvas(400, 200),
-            ctx = canvas.getContext('2d');
-        fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-            if (err) return console.log(err);
-            let BG = Canvas.Image;
-            let ground = new Image;
-            ground.src = Background;
-            ctx.drawImage(ground, 0, 0, 400, 200);
-             
-          
-
-                let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(100) + ".png" : member.user.displayAvatarURL;
-                jimp.read(url, (err, ava) => {
-                    if (err) return console.log(err);
-                    ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                        if (err) return console.log(err);
-                        
-                        ctx.font = "bold 12px Arial";
-                        ctx.fontSize = '20px';
-                        ctx.fillStyle = "#f1f1f1";
-                        ctx.textAlign = "center";
-                        ctx.fillText(`welcome to server`, 300, 130);
-                        
-                        ctx.font = "bold 12px Arial";
-                        ctx.fontSize = '20px';
-                        ctx.fillStyle = "#f1f1f1";
-                        ctx.textAlign = "center";
-                        ctx.fillText(member.user.username, 200, 150);
- 
-                let Avatar = Canvas.Image;
-                              let ava = new Avatar;
-                              ava.src = buf;
-                              ctx.beginPath();
-                              ctx.arc(77, 101, 62, 0, Math.PI*2);
-                              ctx.stroke();
-                                 ctx.clip();
-                                 ctx.drawImage(ava, 13, 38, 128, 126);  
-                          
-                
-                             
-welcomer.sendFile(canvas.toBuffer())
-
-
-
-      
-      
-                    }  )  
-      
-                    
-
-})
-      });                    
- }
-});
-client.on('guildMemberRemove', member => {
+    client.on('guildMemberRemove', member => {
         var embed = new Discord.RichEmbed()
         .setAuthor(member.user.username, member.user.avatarURL)
         .setThumbnail(member.user.avatarURL)
@@ -646,7 +581,7 @@ client.on('guildMemberRemove', member => {
     channel.send({embed : embed});
     })
 client.on('guildMemberAdd', member=> {
-    member.addRole(member.guild.roles.find("name","welcome")); //اسم الرتبة
+    member.addRole(member.guild.roles.find("name","[ᶆéᶆ฿éɹ]")); //اسم الرتبة
     });
 	
 
@@ -760,25 +695,6 @@ message.channel.sendEmbed(cat);
     .addField("** :rocket: Ping **" , Date.now() - message.createdTimestamp)
     .setTimestamp()
   message.channel.sendEmbed(embed);
-    }
-});
-
-/*افتار*/
-
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "avatar")) {
-        var mentionned = message.mentions.users.first();
-    var x5bzm;
-      if(mentionned){
-          var x5bzm = mentionned;
-      } else {
-          var x5bzm = message.author;
-          
-      }
-        const embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setImage(`${x5bzm.avatarURL}`)
-      message.channel.sendEmbed(embed);
     }
 });
 
@@ -1578,7 +1494,6 @@ client.on('message', message => {
      xkiller.send(`<@${member.user.id}> تمت الدعوه من <@${inviter.id}>`);
   });
 });
-client.login('NDgwNzM4NTIzNjk2MjAxNzI5.Dl9PIA.48CAMtPWvyvZawa9M-KqwtvVLlY');
 client.on('message', message => {
        if(message.content === prefix + "mutechannel") {
                            if(!message.channel.guild) return message.reply('** This command only for servers**');
@@ -2051,17 +1966,6 @@ client.on('message',async message => {
   }
 });
 
-client.on('guildMemberAdd', member => {
-    var embed = new Discord.RichEmbed()
-    .setThumbnail(member.user.avatarURL)
-  .addField("***شكرا الانضمامك الـنـا***" ,member.user.username )
-    .setDescription('**# ``-`` __W__elcome __T__ø ${message.guild.name} 🥂**')// كلام ترحيب بعضو
-    .setColor('RANDOM')
-    .setImage('http://www.animatedimages.org/data/media/707/animated-welcome-image-0291.gif')// صور ترحيب
-var channel =member.guild.channels.find('name', 'welcome')// اسم شات ترحيب
-if (!channel) return;
-channel.send({embed : embed});
-});
 
 client.on("message", message => {
     if (message.content === "#rules") {
@@ -2145,90 +2049,512 @@ return channel.send("** نورت سيرفرنا حبيبي اتمنى تستمت
     }
     )});
 	
-	client.on("message", (message) => {
-    /// Me Codes
-   if (message.content.startsWith("#new")) {    
-        const reason = message.content.split(" ").slice(1).join(" ");    
-        if (!message.guild.roles.exists("name", "Support Team")) return message.channel.send(`يجب انشاء رتبة بإٍسم : \`Support Team\` وتعطيها للبوت لكي يستطيع التعديل والانشاء `);
-        if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`You already have a ticket open.`);   
-        message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
-            let role = message.guild.roles.find("name", "Support Team");
-            let role2 = message.guild.roles.find("name", "@everyone");
-            c.overwritePermissions(role, {
-                SEND_MESSAGES: true,
-                READ_MESSAGES: true
-            });    
-            c.overwritePermissions(role2, {
-                SEND_MESSAGES: false,
-                READ_MESSAGES: false
-            });
-            c.overwritePermissions(message.author, {
-                SEND_MESSAGES: true,
-                READ_MESSAGES: true
-            });
-            message.channel.send(`:white_check_mark: تم انشاء تذكرتك, #${c.name}.`);
-            const embed = new Discord.RichEmbed()
-                .setColor(0xCF40FA)
-                .addField(`Hey ${message.author.username}!`, `تم فتح تذكرة الرجاء انتظار الى حين يأتي مشرف ويقوم بلرد عليك`)
-                .setTimestamp();
-            c.send({
-                embed: embed
-            });
-        }).catch(console.error);
+	// Bot Configs:
+const config = require(path.join(__dirname, 'config.json')); // Bot Config
+const {
+  token,
+  prefix,
+  ids
+} = config;
+// Clients:
+const Client = new Discord.Client() // Discord Client
+Client.commands = new Discord.Collection() // Discord Collection For Commands
+Client.aliases = new Discord.Collection() // Discord Collection For Aliases
+
+// SQLite And Databases:
+SQLite.open(path.join(__dirname, 'profile.sql')) // Read SQL file
+.then(() => {
+  console.log('Opened')
+  SQLite.run(`CREATE TABLE IF NOT EXISTS profileSystem (id VARCHAR(30), credits BIGINT, lastDaily BIGINT, xp BIGINT, level BIGINT, rep BIGINT, lastRep BIGINT, info TEXT, inventory JSON, profileData JSON)`)
+})
+.catch(err => console.error(err))
+
+// Commands Here
+let cmds = {
+  profile: { cmd: 'بروفايل', a: ['بروفايلي'] },
+  setinfo: { cmd: 'معلوماتي', a: ['معلوماتي تعديل'] },
+  rep: { cmd: 'لايك', a: ['اعجاب'] },
+  credits: { cmd: 'فلوسي', a: ['رصيدي'] },
+  daily: { cmd: 'هدية', a: ['هديه'] },
+  transfer: { cmd: 'تحويل' },
+  add: { cmd: 'فلوس' },
+  buy: { cmd: 'شراء' },
+  set: { cmd: 'خلفية', a: ['خلفيه'] },
+  preview: { cmd: 'تجربة', a: ['تجربه'] },
+  mywalls: { cmd: 'خلفياتي' }
+}
+
+// Register Commands
+Object.keys(cmds).forEach(key => {
+var value = cmds[key];
+  var command = value.cmd;
+  Client.commands.set(command, command);
+
+  if(value.a) {
+    value.a.forEach(alias => {
+    Client.aliases.set(alias, command)
+  })
+  }
+})
+
+// Functions
+let funcs = {
+
+  generateInt: (low, high) => {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+  },
+  getLevelFromExp: (exp) => {
+    let level = 0;
+
+        while (exp >= funcs.getLevelExp(level)) {
+            exp -= funcs.getLevelExp(level);
+            level++;
+        }
+
+        return level;
+  },
+  getLevelExp: (level) => {
+    return 5 * (Math.pow(level, 2)) + 50 * level + 100;
+  }
+
+}
+
+// Code Begin Here ..
+
+Client.on('ready', () => { // When Bot is ready
+  console.log(`Bot is launched.`);
+})
+
+Client.on('message', async msg => { // When Bot is recived message
+  if(msg.author.bot) return; // If Message author is bot dont reply to it .
+
+  SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`).then(res => {
+
+    var s;
+
+    let xp = funcs.generateInt(1, 5); // Generate XP
+
+    if(!res) s = `INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", '{}', '{"wallSrc": "/walls/p2.png"}')`
+
+    if(res) {
+
+      xp = res.xp + xp;
+
+      console.log(xp);
+
+      let level = funcs.getLevelFromExp(xp);
+      console.log(level);
+      let lvl = res.level;
+
+      if(res.level != level) {
+        lvl++;
+        msg.channel.send('Level UP!, ' + msg.author + ' just reached level ' + level)
+      }
+
+      s = `UPDATE profileSystem SET xp = ${xp}, level = ${lvl} WHERE id = '${msg.author.id}'`
+
     }
- 
- 
-  if (message.content.startsWith("#close")) {
-        if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
- 
-       message.channel.send(`هل انت متأكد من اقفالك للتذكرة اذا متأكد اكتب #confirm`)
-           .then((m) => {
-               message.channel.awaitMessages(response => response.content === '#confirm', {
-                       max: 1,
-                       time: 10000,
-                       errors: ['time'],
-                   })    
-                   .then((collected) => {
-                       message.channel.delete();
-                   })   
-                   .catch(() => {
-                       m.edit('Ticket close timed out, the ticket was not closed.').then(m2 => {
-                           m2.delete();
-                       }, 3000);
-                   });
-           });
-   }
- 
+
+    SQLite.run(s);
+
+  }).catch(err => console.error(err))
+
+    const prefixMention = new RegExp(`^<@!?${Client.user.id}>( |)$`);
+    if (msg.content.match(prefixMention)) {
+      return msg.reply(`My prefix is \`${prefix}\``);
+    }
+
+    if(!msg.content.startsWith(prefix)) return undefined;
+
+    let args = msg.content.slice(prefix.length).trim().split(/ +/g);
+    let command = args.shift().toLowerCase();
+
+    let cmd = Client.commands.get(command) || Client.commands.get(Client.aliases.get(command))
+
+    if(msg.content.startsWith(prefix + 'test')) {
+
+      let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`)
+
+      if(args[0] == 'delete') {
+        SQLite.run(`DELETE * FROM profileSystem`)
+        msg.channel.send('Deleted !')
+      } else if(args[0] == 'reps') {
+
+        msg.channel.send(`Reps: ${res.rep}`)
+
+      } else {
+
+      msg.channel.send(`XP:${res.xp}, Level:${res.level}`)
+      }
+    }
+
+    if(cmd == 'فلوسي') {
+
+      let user = msg.mentions.users.first() || msg.author;
+
+      let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${user.id}'`)
+      if(!res) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+      let credits;
+
+      if(!res) credits = 0;
+      else credits = res.credits;
+
+      if(!msg.mentions.users.first()) {
+
+      msg.channel.send(`**Your 💳 balance is: **\`$${credits}\``)
+
+    } else {
+
+      if(msg.mentions.users.first().bot) return msg.channel.send('The Bots doesn\'t have credits.')
+
+
+      msg.channel.send(`**${user.tag} 💳 balance is: **\`$${credits}\``)
+
+      }
+
+  } else if(cmd == 'هدية') {
+
+    let daily = 86400000;
+    let amount = funcs.generateInt(100, 300)
+
+    let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`)
+    if(!res) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+    let curDaily = res.lastDaily;
+
+    let credits = res.credits;
+
+    if(curDaily != null && daily - (Date.now() - curDaily) > 0) {
+
+      let timeObj = ms(daily - (Date.now() - curDaily));
+
+      msg.channel.send(`You already collected your daily, try again after ${timeObj.hours} Hours, ${timeObj.minutes} Minutes and ${timeObj.seconds} Seconds.`)
+
+    } else {
+
+      msg.channel.send(`You have successfully collected your daily reward: \`${amount}\``);
+
+      SQLite.run(`UPDATE profileSystem SET credits = ${credits + amount}, lastDaily = ${Date.now()} WHERE id = '${msg.author.id}'`);
+
+    }
+
+  } else if(cmd == 'لايك') {
+
+    let rep = 86400000;
+
+    let men = msg.mentions.users.first();
+
+    if(!men) return msg.channel.send('Please mention the user you want to give him rep.');
+
+    if(men.id === msg.author.id) return msg.channel.send('You can\'t give yourself.');
+
+    if(men.bot) return msg.channel.send('You can\'t give bots rep, but you can give me a rep.')
+
+    let resOfMen = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${men.id}'`);
+    let resOfAuthor = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`)
+    if(!resOfMen) SQLite.run(`INSERT INTO profileSystem VALUES ('${men.id}', 200, 0, 0, 0, 0, 0, "Type ${prefix}setinfo to set info", "")`)
+    if(!resOfAuthor) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+    let curRep = resOfAuthor.lastRep;
+
+    if(curRep != null && rep - (Date.now() - curRep) > 0) {
+
+      let timeObj = ms(rep - (Date.now() - curRep));
+
+      msg.channel.send(`You already gived your reputation point to someone, try again after ${timeObj.hours} Hours, ${timeObj.minutes} Minutes and ${timeObj.seconds} Seconds.`)
+
+    } else {
+
+      msg.channel.send(`You have successfully gived ${men} a reputation point!`)
+
+      SQLite.run(`UPDATE profileSystem SET lastRep = ${Date.now()} WHERE id = '${msg.author.id}'`)
+      SQLite.run(`UPDATE profileSystem SET rep = ${resOfMen.rep + 1} WHERE id = '${men.id}'`)
+
+    }
+
+  } else if(cmd == 'تحويل') {
+
+    let men = msg.mentions.users.first();
+
+    if(!men) return msg.channel.send('Please mention the user you want to transfer credits to him.');
+
+    if(men.id === msg.author.id) return msg.channel.send('You can\'t transfer to yourself.');
+
+    if(men.bot && men.id !== Client.user.id) return msg.channel.send('You can\'t transfer credits to bots.')
+
+    let resOfMen = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${men.id}'`);
+    let resOfAuthor = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`)
+    if(!resOfMen) SQLite.run(`INSERT INTO profileSystem VALUES ('${men.id}', 200, 0, 0, 0, 0, 0, "Type ${prefix}setinfo to set info", "")`)
+    if(!resOfAuthor) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+    let creditsOfMen = resOfMen.credits;
+    let creditsOfAuthor = resOfAuthor.credits;
+
+    if(!args[1] || isNaN(args[1])) return msg.channel.send('Please input number of credits to transfer it.');
+
+    if(parseInt(args[1]) > creditsOfAuthor) return msg.channel.send('You don\'t have enough credits to do this.');
+
+    let newAuthorCredits = (creditsOfAuthor - parseInt(args[1]));
+    let newMenCredits = (creditsOfMen + parseInt(args[1]));
+
+    SQLite.run(`UPDATE profileSystem SET credits = ${newAuthorCredits} WHERE id = '${msg.author.id}'`);
+    SQLite.run(`UPDATE profileSystem SET credits = ${newMenCredits} WHERE id = '${men.id}'`);
+
+    msg.channel.send(`${msg.author} has tranfered \`$${args[1]}\` to ${men}.`)
+
+
+  } else if(cmd == 'فلوس') {
+
+    if(!ids.includes(msg.author.id)) return;
+
+    let men = msg.mentions.users.first() || msg.author;
+
+    if(men.bot) return msg.channel.send('Bots dosen\'t have credits.');
+
+    let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${men.id}'`);
+    if(!res) SQLite.run(`INSERT INTO profileSystem VALUES ('${men.id}', 200, 0, 0, 0, 0, 0, "Type ${prefix}setinfo to set info", "")`)
+
+    let resu;
+
+    if(men.id === msg.author.id && !msg.mentions.users.first()) resu = args[0];
+    else resu = args[1];
+
+    if(!resu || isNaN(resu)) return msg.channel.send('Please input number to add it.');
+
+    SQLite.run(`UPDATE profileSystem SET credits = ${res.credits + parseInt(resu)} WHERE id = '${men.id}'`)
+
+    msg.channel.send('Added!')
+
+  } else if(cmd == 'معلوماتي') {
+
+    let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`);
+    if(!res) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+    if(!args[0]) return msg.channel.send('Please input info to set it.');
+
+    SQLite.run(`UPDATE profileSystem SET info = "${args.join(' ')}" WHERE id = '${msg.author.id}'`)
+
+    msg.channel.send('Your info set to: **' + args.join(' ') + '**')
+
+  } else if(cmd == 'شراء') {
+
+    let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`);
+    if(!res) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+    let hisWalls = res.inventory;
+
+    let wallsShop = config.wallpapers;
+
+    let credits = res.credits;
+
+    if(!args[0] || isNaN(args[0])) return msg.channel.send('Please Select Wallpaper Number.');
+
+    let json = JSON.parse(hisWalls);
+
+    if(!json.walls) json = {
+      walls: {}
+    };
+
+    if(!wallsShop[args[0]]) return msg.channel.send('There is no wallpaper with this number.')
+
+    if(json.walls[args[0]] == wallsShop[args[0]]) return msg.channel.send('You already bought this wallpaper.');
+
+    if(credits < wallsShop[args[0]].price) return msg.channel.send('You don\'t have enough credits to buy this wallpaper');
+
+    json.walls[args[0]] = wallsShop[args[0]];
+
+    let updatedJson = JSON.stringify(json);
+
+    SQLite.run(`UPDATE profileSystem SET inventory = json('${updatedJson}'), credits = ${credits - wallsShop[args[0]].price} WHERE id = '${msg.author.id}'`)
+
+    msg.channel.send(`You have successfully purchased wallpaper No.${args[0]} With Price: \`$${wallsShop[args[0]].price}\``)
+
+  } else if(cmd == 'خلفية') {
+
+    let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`)
+    if(!res) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+    let hisWalls = res.inventory;
+
+    if(!args[0] || isNaN(args[0])) return msg.channel.send('Please Select Wallpaper Number.');
+
+    let json = JSON.parse(hisWalls)
+
+    if(!json.walls[args[0]]) return msg.channel.send('You don\'t have this wallpaper in your inventory.');
+
+    let proData = res.profileData;
+
+    let data = JSON.parse(proData);
+
+    data.wallSrc = json.walls[args[0]].src;
+
+    SQLite.run(`UPDATE profileSystem SET profileData = json('${JSON.stringify(data)}') WHERE id = '${msg.author.id}'`);
+
+    msg.channel.send(`Your profile image has been set.`);
+
+  } else if(cmd == 'تجربة') {
+
+    let wallpapers = config.wallpapers;
+
+    if(!args[0] || isNaN(args[0])) return msg.channel.send('Please Select Wallpaper Number.');
+
+    if(!wallpapers[args[0]]) return msg.channel.send('There is no wallpaper with this number.')
+
+    let Image = Canvas.Image,
+    canvas = Canvas.createCanvas(300, 300),
+    ctx = canvas.getContext('2d');
+fs.readFile(__dirname + `/${wallpapers[args[0]].src}`, function (err, Background) {
+  fs.readFile(__dirname + `/walls/p1.png`, function (err, Background) {
+  if (err) return console.log(err);
+  let BG = Canvas.Image;
+  let ground = new Image;
+  ground.src = Background;
+  ctx.drawImage(ground, 0, 0, 297, 305);
+});
+  if (err) return console.log(err);
+  let BG = Canvas.Image;
+  let ground = new Image;
+  ground.src = Background;
+  ctx.drawImage(ground, 0, 0, 300, 305);
 });
 
-client.on('message', message => {//new msg event
-                if(!message.channel.guild) return;
-                  if(message.content.startsWith(prefix + 'setrainbow')) {//to create the rainbow role
-                      let role = message.guild.roles.find('name', 'Rainbow bot.')
-                    if(role) return message.channel.send(`This Step Already Completed !`)//if the role already created return with this msg
-                  //start of create role 
-                  if(!role){
-                    rainbow =  message.guild.createRole({
-                   name: "Rainbow bot.",//the role will create name
-                   color: "#000000",//the default color
-                   permissions:[]//the permissions
-                 //end of create role
-                })
+  setTimeout(() => {
+  msg.channel.send({file:canvas.toBuffer()})
+}, 2000)
+  } else if(cmd == 'خلفياتي') {
 
-                }
-                message.channel.send('Done The Rainbow Role Setup Has Been Completed')//if the step completed
-                }})
+    let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = '${msg.author.id}'`);
 
-                client.on('ready', () => {//new ready event
-                  setInterval(function(){
-                      client.guilds.forEach(g => {
-                                  var role = g.roles.find('name', 'Rainbow bot.');//rainbow role name
-                                  if (role) {
-                                      role.edit({color : "RANDOM"});
-                                  };
-                      });
-                  }, 3000);//the rainbow time
-                })
+    let data = JSON.parse(res.inventory);
 
-				
+    if(!data.walls) return msg.channel.send('You don\'t have any wallpapers in your inventory');
+
+    let wallsArray = [];
+
+      for (const [key, value] of Object.entries(data.walls)) {
+        console.log(`${key} ${JSON.stringify(value)}`);
+
+          wallsArray.push({number: key, s: value.src, p: value.price});
+
+      }
+
+    let embed = new Discord.RichEmbed()
+    .setAuthor(`${msg.author.username}`, msg.author.displayAvatarURL)
+    .setDescription(`Your Wallpapers:`)
+    .setFooter(`Tip: To preview wallpaper try \`${prefix}تجربة\``)
+
+    for (var wall in wallsArray) {
+      embed.addField(`Wallpaper No.${wallsArray[wall].number}`, `Price: ${wallsArray[wall].p}`, true)
+    }
+
+    msg.channel.send(embed)
+
+  } else if(cmd == 'بروفايل') {
+
+    let getvalueof = msg.mentions.users.first() || msg.author;
+
+    let res = await SQLite.get(`SELECT * FROM profileSystem WHERE id = ${getvalueof.id}`)
+
+    if(!res) SQLite.run(`INSERT INTO profileSystem VALUES ('${msg.author.id}', 200, 0, ${xp}, 0, 0, 0, "Type ${prefix}setinfo to set info", "{}", "{wallSrc: '/walls/p2.png'}"`)
+
+
+    let Image = Canvas.Image,
+    canvas = Canvas.createCanvas(300, 300),
+    ctx = canvas.getContext('2d');
+fs.readFile(__dirname + `/${JSON.parse(res.profileData).wallSrc}`, function (err, Background) {
+  fs.readFile(__dirname + `/walls/p1.png`, function (err, Background) {
+  if (err) return console.log(err);
+  let BG = Canvas.Image;
+  let ground = new Image;
+  ground.src = Background;
+  ctx.drawImage(ground, 0, 0, 297, 305);
+});
+  if (err) return console.log(err);
+  let BG = Canvas.Image;
+  let ground = new Image;
+  ground.src = Background;
+  ctx.drawImage(ground, 0, 0, 300, 305);
+});
+
+
+let url = getvalueof.displayAvatarURL.endsWith(".webp") ? getvalueof.displayAvatarURL.slice(5, -20) + ".png" : getvalueof.displayAvatarURL;
+Jimp.read(url, (err, ava) => {
+    if (err) return console.log(err);
+    ava.getBuffer(Jimp.MIME_PNG, async (err, buf) => {
+        if (err) return console.log(err);
+
+
+        //Avatar
+       let Avatar = Canvas.Image;
+        let ava = new Avatar;
+        ava.src = buf;
+     ctx.drawImage(ava, 8, 43, 80, 85); // احداثيات صورتك
+
+        //ur name
+        ctx.font = 'bold 16px profile'; // حجم الخط و نوعه
+        ctx.fontSize = '40px'; // عرض الخط
+        ctx.fillStyle = "#FFFFFF"; // لون الخط
+        ctx.textAlign = "left"; // محاذا ة النص
+        ctx.fillText(`${getvalueof.username}`, 100, 125) // احداثيات اسمك
+
+         //bord
+         let leaderboard = await SQLite.all(`SELECT * FROM profileSystem ORDER BY xp DESC, credits DESC`);
+        ctx.font = "regular 12px profile" // نوع الخط وحجمه
+        ctx.fontSize = '50px'; // عرض الخط
+        ctx.fillStyle = "#FFFFFF" // لون الخط
+        ctx.textAlign = "left"; // محاذا ة
+        for(var i = 0;i<leaderboard.length;i++) {
+          if(leaderboard[i].id == getvalueof.id) {
+            ctx.fillText(`#${i+1}`, 173, 200)
+          }
+        }
+
+
+        //credit
+        ctx.font = "bold 10px profile" // نوع الخط وحجمه
+        ctx.fontSize = '10px'; // عرض الخط
+        ctx.fillStyle = '#FFFFFF' // لون الخط
+        ctx.textAlign = "left"; // محاذا ة النص
+        ctx.fillText(`$ ${res.credits}`, 156, 163) // احداثيات المصاري
+
+        //poits
+        ctx.font = "bold 13px profile" // ن
+        ctx.fontSize = '10px'; // عرض الخطوع الخط وحجمه
+        ctx.fillStyle = "#FFFFFF" // لون الخط
+        ctx.textAlign = "left"; // محاذا ة النص
+        ctx.fillText(`${res.xp}`, 173, 182) // احداثيات النقاط
+
+        //Level
+        ctx.font = "bold 27px profile" // نوع الخط و حجمه
+        ctx.fontSize = '50px'; // عرض الخط
+        ctx.fillStyle = "#FFFFFF" // لون الخط
+        ctx.textAlign = "left"; // محاذا ة النص
+        ctx.fillText(`${res.level}`, 30, 200) // احداثيات اللفل
+
+        //info
+        ctx.font = "blod 13px profile" // ن
+        ctx.fontSize = '10px'; // عرض الخطوع الخط وحجمه
+        ctx.fillStyle = "#FFFFFF" // لون الخط
+        ctx.textAlign = "left"; // محاذا ة النص
+        ctx.fillText(`${res.info}`, 118, 40) // احداثيات النقاط
+
+        // REP
+        ctx.font = "bold 27px profile";
+        ctx.fontSize = "100px";
+        ctx.fillStyle = "#FFFFFF";
+        ctx.textAlign = "left";
+        ctx.fillText(`+${res.rep}`, 18,270)
+
+msg.channel.send("**:white_check_mark: `Show Profile` ➤**" + `${msg.author}`, {
+file: canvas.toBuffer()
+})
+})
+})
+
+
+  }
+
+});
+
 client.login(process.env.BOT_TOKEN)
