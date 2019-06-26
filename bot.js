@@ -574,8 +574,6 @@ client.on('guildMemberAdd', member => {
     if (!channel) return;
     channel.send({embed : embed});
     })
- 
-    })
 client.on('guildMemberAdd', member=> {
     member.addRole(member.guild.roles.find("name","[ᶆéᶆ฿éɹ]")); //اسم الرتبة
     });
