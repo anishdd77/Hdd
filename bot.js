@@ -11,7 +11,7 @@ client.on('message', message => {
   if (!message.content.startsWith(prefix)) return;
   var args = message.content.split(' ').slice(1);
   var argresult = args.join(' ');
-  if (message.author.id !== "580829741498630192") return;
+  if (message.author.id !== "484326398568300555") return;
 
   
   if (message.content.startsWith(prefix + 'setwatch')) {
@@ -57,24 +57,6 @@ const moment = require('moment')
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-client.on('ready', function(){
-    var ms = 100000 ;
-    var setGame = [`[ #help ]`];   
-    var i = -1;
-    var j = 0;
-    setInterval(function (){
-        if( i == -1 ){
-            j = 1;
-        }
-        if( i == (setGame.length)-1 ){
-            j = -1;
-        }
-        i = i+j;
-        client.user.setGame(setGame[i],`http://www.twitch.tv/KiNg66S`);
-    }, ms);100000
-
-});
-
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) { //Anis_hdd - [ ANIS_Malumuat]
     let pages = [`
