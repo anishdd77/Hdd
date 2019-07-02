@@ -49,7 +49,6 @@ if (message.content.startsWith(prefix + 'setgame')) {
      console.log('test' + argresult);
     message.channel.sendMessage(`Playing: **${argresult}`)
 } 
-
 });
 const moment = require('moment')
 client.on('ready', () => {
@@ -71,6 +70,7 @@ client.on('ready', function(){
         i = i+j;
         client.user.setGame(setGame[i],`http://www.twitch.tv/barontube`);
     }, ms);
+	
 client.on('message', message => {
 if (message.content.startsWith(prefix + 'help')) { //Anis_hdd - [ ANIS_Malumuat]
     let pages = [`
