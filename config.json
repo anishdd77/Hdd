@@ -1,0 +1,47 @@
+{
+  "token":"التوكن",
+  "prefix": "بريفكس",
+  "ids": ["505638480248963072"],
+  "wallpapers": {
+    "1": {
+        "src": "walls/p2.png",
+        "price": 0
+    },
+    "2": {
+        "src": "walls/p3.png",
+        "price": 1069
+    },
+    "3": {
+        "src": "walls/p4.png",
+        "price": 2300
+    },
+    "4": {
+        "src": "walls/p5.jpg",
+        "price": 3000
+    },
+    "5": {
+        "src": "walls/p6.jpg",
+        "price": 4000
+    },
+    "6": {
+        "src": "walls/p7.png",
+        "price": 5500
+    },
+    "7": {
+        "src": "walls/p8.jpg",
+        "price": 8000
+    },
+     "8": {
+        "src": "walls/p9.jpeg",
+        "price": 9000
+    },
+    "9": {
+      "src": "walls/p10.jpg",
+      "price": 10000
+    },
+    "10": {
+      "src": "walls/p12.png",
+      "price": 12000
+    }
+  }
+}
